@@ -105,10 +105,10 @@ level: 2
 # WebRTC based Video Conference Applications (VCAs)
 
 <div grid="~ cols-2 gap-2" m="t-2">
-<img src="src/zoom.png" style="max-width: 90%; max-height: 100%;">
-<img src="src/meet.jpg" style="max-width: 100%; max-height: 100%;">
-<img src="src/webex.jpg" style="max-width: 90%; max-height: 100%;">
-<img src="src/Teams.png" style="max-width: 100%; max-height: 100%;">
+<img src="/zoom.png" style="max-width: 90%; max-height: 100%;">
+<img src="/meet.jpg" style="max-width: 100%; max-height: 100%;">
+<img src="/webex.jpg" style="max-width: 90%; max-height: 100%;">
+<img src="/Teams.png" style="max-width: 100%; max-height: 100%;">
 </div>
 
 
@@ -197,7 +197,7 @@ Focused on video QoE for VCAs
 
 <div v-click=1>
 
-<img src="src/fps.gif">
+<img src="/fps.gif">
 
 </div>
 
@@ -218,7 +218,7 @@ Three kinds of *payload type*:
 </div>
 
 <div v-click>
-<img src="src/v-a.png" style="margin: auto; max-width: 50%; max-height: 100%;">
+<img src="/v-a.png" style="margin: auto; max-width: 50%; max-height: 100%;">
 </div>
 
 <div v-click>
@@ -240,7 +240,7 @@ Identifying the video frame boundaries (by identifying frame end time) without u
 
 </div>
 
-<img v-click src="src/depature-time.png" style="margin: auto;">
+<img v-click src="/depature-time.png" style="margin: auto;">
 
 <div v-click>
 
@@ -251,7 +251,7 @@ Identifying the video frame boundaries (by identifying frame end time) without u
 
 </div>
 
-<img v-click src="src/actual.png" style="margin: auto;">
+<img v-click src="/actual.png" style="margin: auto;">
 
 ---
 transition: slide-up
@@ -269,7 +269,7 @@ Identifying the video frame boundaries (by identifying frame end time) without u
 
 </div>
 
-<img v-click src="src/packet-size.png" style="margin: auto; max-width: 50%;">
+<img v-click src="/packet-size.png" style="margin: auto; max-width: 50%;">
 
 ---
 transition: slide-up
@@ -290,7 +290,7 @@ Identifying the video frame boundaries (by identifying frame end time) without u
 
 </div>
 
-<img v-click src="src/algo1.png">
+<img v-click src="/algo1.png">
 
 </div>
 
@@ -299,7 +299,7 @@ transition: fade-out
 ---
 # Heuristic method
 
-<img src="src/ppt-show.png">
+<img src="/ppt-show.png">
 
 ---
 transition: fade-out
@@ -311,7 +311,7 @@ Wrong estimation of frame boundaries
 
 <br>
 
-<img v-click src="src/failure.png">
+<img v-click src="/failure.png">
 
 ---
 transition: slide-up
