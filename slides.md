@@ -5,7 +5,7 @@ theme: seriph
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
 # some information about your slides, markdown enabled
-title: Welcome to Slidev
+title: WebRTC-QoE
 info: |
   ## Slidev Starter Template
   Presentation slides for developers.
@@ -27,7 +27,7 @@ mdc: true
 
 <br>
 
-## Taveesh Sharma, Tarun Mangla et.al
+## Taveesh Sharma, Tarun Mangla et.al *IMC 2023*
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
@@ -102,7 +102,220 @@ transition: slide-up
 level: 2
 ---
 
-# Navigation
+# WebRTC based Video Conference Applications (VCAs)
+
+<div grid="~ cols-2 gap-2" m="t-2">
+<img src="src/zoom.png" style="max-width: 90%; max-height: 100%;">
+<img src="src/meet.jpg" style="max-width: 100%; max-height: 100%;">
+<img src="src/webex.jpg" style="max-width: 90%; max-height: 100%;">
+<img src="src/Teams.png" style="max-width: 100%; max-height: 100%;">
+</div>
+
+
+<!--
+Here is another comment.
+-->
+
+---
+transition: slide-left
+---
+
+# Motivation
+- Quality of Experience (QoE) is critical for VCAs' using
+- QoE can be improved by optimizing both the end hosts and <span v-mark.circle.orange="1">the network</span>
+
+<div v-click>
+</div>
+
+<div v-click>
+
+How can network operators know about QoE metrices?
+
+  - Existing VCA QoE estimation methods use passive measurements of application-level RTP headers
+    - They have no access to end hosts
+    - Some apps may use custom RTP protocols → need special methods
+    - VPN → encrypted application headers
+
+</div>
+
+<div v-click>
+
+**GOAL**: Can we use <span v-mark.underline.red="3">IP/UDP headers</span> to infer QoE?
+
+</div>
+
+<div v-click>
+
+```mermaid {theme: 'neutral', scale: 0.8}
+graph TD
+A[IP/UDP Heuristic]
+B[IP/UDP ML]
+C[RTP Heuristic]
+D[RTP ML]
+```
+
+</div>
+
+---
+transition: slide-left
+layout: two-cols
+layoutClass: gap-16
+---
+
+# QoE metrices
+Focused on video QoE for VCAs
+> previous work has already estimated audio QoE for VoIP
+
+<div v-click>
+
+- Frame Rate/FPS (Smoothness)
+
+</div>
+
+<div v-click>
+
+- Bitrate (Data Transfer Rate)
+
+</div>
+
+<div v-click>
+
+- Frame Jitter (Consistency)
+
+</div>
+
+<div v-click>
+
+- Resolution (Detail)
+
+</div>
+
+::right::
+<br>
+<br>
+<br>
+
+<div v-click=1>
+
+<img src="src/fps.gif">
+
+</div>
+
+
+---
+transition: fade-out
+---
+# Method-Step 1
+The first step involves isolating the video traffic from the audio component
+
+<div v-click>
+
+Three kinds of *payload type*:
+- PT = 111: audio encoded using OPUS → \[89, 385\] bytes
+- PT = 102: video encoded using H.264 → 99% > 564 bytes
+- PT = 103: video retransmissions → 92% 304 bytes: keep-alive messages
+
+</div>
+
+<div v-click>
+<img src="src/v-a.png" style="margin: auto; max-width: 50%; max-height: 100%;">
+</div>
+
+<div v-click>
+
+> Use a size threshold $V_{min}$ to identify video packets
+
+</div>
+
+
+---
+transition: slide-up
+---
+# Method-Step 2
+Identifying the video frame boundaries (by identifying frame end time) without using RTP headers
+
+<div v-click>
+
+- **Key Insight 1**: inter-departure time within the frame < inter-departure time across the frame
+
+</div>
+
+<img v-click src="src/depature-time.png" style="margin: auto;">
+
+<div v-click>
+
+- Problems:
+  - packet timings can change when packets traverse along the network
+  - patterns in inter-departure time may not appear in inter-arrival time
+  - happens when congestion or packet loss occurs
+
+</div>
+
+<img v-click src="src/actual.png" style="margin: auto;">
+
+---
+transition: slide-up
+---
+# Method-Step 2
+Identifying the video frame boundaries (by identifying frame end time) without using RTP headers
+
+<div v-click>
+
+- **Key Insight 2**: there are unique patterns in packet sizes
+  - packet sizes tend to resemble those within the same frame and differ from those in consecutive frames
+  - VCAs typically fragment a frame into equal-sized packets
+    - Forward Error Correction (FEC) mechanisms
+      - bandwidth-efficient when packets in a frame have equal length
+
+</div>
+
+<img v-click src="src/packet-size.png" style="margin: auto; max-width: 50%;">
+
+---
+transition: slide-up
+---
+# Method-Step 2
+Identifying the video frame boundaries (by identifying frame end time) without using RTP headers
+
+<div grid="~ cols-2 gap-1" m="t-2">
+
+<div v-click>
+
+- **Frame boundary estimation**: 
+  - packet size threshold $\Delta^{max}_{size}$
+  - not sufficient to compare only consecutive packets as packets can arrive out of order
+    - compare with up to $N^{max}$ packets taht arrived before this packet
+    - $N^{max}$ should be set carefully
+
+
+</div>
+
+<img v-click src="src/algo1.png">
+
+</div>
+
+---
+transition: fade-out
+---
+# Heuristic method
+
+<img src="src/ppt-show.png">
+
+---
+transition: fade-out
+---
+# IP/UDP Heuristic Failure Cases
+Wrong estimation of frame boundaries
+
+## Three cases
+
+<br>
+
+<img v-click src="src/failure.png">
+
+---
+transition: slide-up
+---
 
 Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
 
