@@ -314,508 +314,231 @@ Wrong estimation of frame boundaries
 <img v-click src="/failure.png">
 
 ---
-transition: slide-up
+transition: fade-out
 ---
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1"></Toc>
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc v-click minDepth="1" maxDepth="2"></Toc>
-
----
-layout: image-right
-image: https://cover.sli.dev
----
-
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover![^1]
-
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-level: 2
----
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
+# Machine Learning Approach
+Dur to incorrect estimation of frame boundaries in Heuristic methods → ML method
+## Input features
 
 <div v-click>
 
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
+  - Flow-level statistics (derived from IP/UDP headers)
 
 </div>
+
+<div v-click>
+
+- VCA semantics-based → IP/UDP ML
+  - Number of unique packet sizes
+  - Number of microbursts
+
+</div>
+
+<div v-click>
+
+  - RTP-based features (derived from RTP headers) → RTP ML
+
+</div>
+
+<img v-click src="/table.png">
+
+<div v-click>
+
+- Method: Random Forests
+
+</div>
+
+---
+transition: fade-out
+---
+# Experiment Setup And Datasets
+VCAs running over WebRTC: Google Meet, Microsoft Teams and Cisco Webex 
+
+<div v-click>
+
+### Acquiring ground truth of QoE metrices:
+- `webrtc-internals` API provided by Google Chrome
+
+</div>
+
+<div v-click>
+
+### Network Conditions
+
+<img v-click src="/network.png" style="margin: auto; width: 87%;">
+
+</div>
+
+---
+transition: fade-out
+---
+# Evaluation-Media Classification Accuracy
+The ground truth is obtained by inspecting the `payload type` RTP header
+
+<img v-click src="/MCA.png" style="margin: auto;">
+
+<div v-click>
+
+- The accuracy of identifying video packets is generally high
+- misclassified packets:
+  - server hello messages over DTLSv1.2
+  - key exchanges in the beginning of the call
+
+</div>
+
+---
+transition: slide-up
+---
+# Evaluation-Frame Rate Estimation Accuracy
+The ground truth is provided by `webrtc-internal` API from Google Chrome
+
+<div v-click grid="~ cols-2 gap-1" m="t-2">
+
+<img src="/FPS.png" style="width: 90%;">
+
+<img src="/FPS-feat.png">
+
+</div>
+
+<div v-click>
+
+- Mean Absolute Error (MAE): RTP ML < IP/UDP ML < RTP Heuristic < IP/UDP Heuristic
+- Heuristic higher:
+  - false frame boundary estimation → overestimation of number of frames
+    - Meet uses V8 or V9 to encode, while others use H.264
+      - V8 or V9 encoding causes intra-frame packet size difference > $\Delta^{max}_{size}$
+  - additional application-level delay (jitter buffer delay) → ML perform better
+
+</div>
+
+---
+transition: slide-up
+---
+# Evaluation-Bitrate Estimation Accuracy
+The ground truth is provided by `webrtc-internal` API from Google Chrome
+
+<div v-click grid="~ cols-2 gap-1" m="t-2">
+
+<img src="/bit.png">
+
+<img src="/bit-feat.png">
+
+</div>
+
+<div v-click>
+
+- Both Heuristic methods are relatively high
+  - Encrypted encoding application-level overheads → hard to know from IP/UDP level
+- Video bitrate is inherently correlated with observed throughput
+
+</div>
+
+---
+transition: slide-up
+---
+# Evaluation-Frame Jittor Estimation Accuracy
+The ground truth is provided by `webrtc-internal` API from Google Chrome
+
+<div v-click grid="~ cols-2 gap-1" m="t-2">
+
+<img src="/jittor.png">
+
+<img src="/jittor-cmp.png">
+
+</div>
+
+<div v-click>
+
+- Overestimate frame jittor in most cases
+  - Jittor buffer introduces varaible delay to ensure smooth video playback
+  - Jittor over decoding delay
+
+</div>
+
+---
+transition: slide-up
+---
+# Evaluation-Resolution Estimation Accuracy
+The ground truth is provided by `webrtc-internal` API from Google Chrome
+- Use frame height as the measurement for resolution
+  - bin the frame height into three classes: *low*($\le$ 240), *medium*(\(240, 480\]), *high*(> 480)
 
 <br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn More](https://sli.dev/guide/animations#click-animations)
-
-</div>
-
----
-preload: false
----
-
-# Motions
-
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
+<img v-click src="/resolution.png" style="margin: auto;">
 <br>
 
-Inline $\sqrt{3x-1}+(1+x)^2$
+<div v-click>
 
-Block
-$$ {1|3|all}
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectivness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
+- 70% of frames in medium class have a frame height of 404, which is close to the threshold 480
 
 </div>
 
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
+---
+transition: slide-up
+---
+# Conditions that IP/UDP ML failed to work
+<img v-click src="/fail.png" style="margin: auto;">
+
+<div v-click>
+
+- Observe an increasing trend in errors as network loss increases
+  - losses lead to retransmissions for video packets, leading to packet reordering
+  - It is not possible to determine the correct order of the packets using only IP/UDP headers
+
+</div>
+
+<div v-click>
+
+- Similar behaviors lead to packet reordering also cause problems
+  - high latency
+  - throughput jittor
+
+</div>
 
 ---
-src: ./pages/multiple-entries.md
-hide: false
+transition: slide-up
 ---
+# Effect of Prediction Window Size
+
+<img v-click src="/window.png" style="margin: auto;">
+
+<div v-click>
+
+- Estimation errors decrease as the prediction window size increases
+- Observe similar patterns across other methods and metrices
+
+</div>
 
 ---
+transition: slide-up
+---
+# Take Away & Future Work
 
-# Monaco Editor
+<div v-click>
 
-Slidev provides built-in Moanco Editor support.
+## Take Away
+- IP/UDP heuristic often fails under challenging network conditions
+- An untuned ML model that uses a combination of VCA-semantics and IP/UDP based features is enough
 
-Add `{monaco}` to the code block to turn it into an editor:
+</div>
 
-```ts {monaco}
-import { ref } from 'vue'
-import hello from './external'
+<div v-click>
 
-const code = ref('const a = 1')
-hello()
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-function fibonacci(n: number): number {
-  return n <= 1
-    ? n
-    : fibonacci(n - 1) + fibonacci(n - 2) // you know, this is NOT the best way to do it :P
-}
-
-console.log(Array.from({ length: 10 }, (_, i) => fibonacci(i + 1)))
-```
+## Future Work
+- Generalizability to other VCAs
+  - The lack of methods to obtain application-level QoE metrices for native VCA client → WebRTC-based
+- Application Modalities
+  - this work only focus on a two-person call scenario
+  - other application modes: disabling video, multi-party conferencing and screen sharing
+- Deploy-ability
+  - implement these approaches within a real-world network (campus network)
+</div>
 
 ---
 layout: center
 class: text-center
 ---
 
-# Learn More
+# Thanks for Listening
 
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+[Paper](https://dl.acm.org/doi/pdf/10.1145/3618257.3624828) · [GitHub](https://github.com/noise-lab/vcaml) · [Conference video](https://dl.acm.org/doi/10.1145/3618257.3624828)
