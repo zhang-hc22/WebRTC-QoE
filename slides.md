@@ -450,7 +450,7 @@ The ground truth is provided by `webrtc-internal` API from Google Chrome
 <div v-click>
 
 - Overestimate frame jittor in most cases
-  - Jittor buffer introduces varaible delay to ensure smooth video playback
+  - Jittor buffer introduces variable delay to ensure smooth video playback
   - Jittor over decoding delay
 
 </div>
