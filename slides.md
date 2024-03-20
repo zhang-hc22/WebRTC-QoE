@@ -284,7 +284,7 @@ Identifying the video frame boundaries (by identifying frame end time) without u
 - **Frame boundary estimation**: 
   - packet size threshold $\Delta^{max}_{size}$
   - not sufficient to compare only consecutive packets as packets can arrive out of order
-    - compare with up to $N^{max}$ packets taht arrived before this packet
+    - compare with up to $N^{max}$ packets that arrived before this packet
     - $N^{max}$ should be set carefully
 
 
